@@ -1,6 +1,9 @@
 #!/usr/bin/python3
-import requests
+'''
+This is used for APIS
+'''
 import json
+import requests
 import sys
 
 todos_endpoint = 'https://jsonplaceholder.typicode.com/todos'
