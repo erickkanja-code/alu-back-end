@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This is conversion to CSV
+This is conversion to JSON
 """
 
 if __name__ == "__main__":
@@ -36,12 +36,15 @@ if __name__ == "__main__":
     TASK_TITLE = task.get('title')
     USER_ID = users_response.json()[0]['id']
     USERNAME = users_response.json()[0]['username']
-    print(tasks)
-    for task in tasks:
+
+    details_dict = {argument: []}
+
+    for task in tasks: 
         TASK_COMPLETED_STATUS = task['completed']
         TASK_TITLE = task['title']
-        with open(f'{argument}.csv', 'a', newline='') as user_id:
-            details_writer = csv.writer(user_id, quoting=csv.QUOTE_ALL)
-
-            details_writer.writerow([USER_ID, USERNAME, TASK_COMPLETED_STATUS, TASK_TITLE])
-        
+        details_list = {"task": TASK_TITLE, "completed": TASK_COMPLETED_STATUS, "username": USERNAME}
+      #  print(details_list)
+        details_dict[argument].append(details_list)
+        with open(f"{argument}.json", "w") as json_file:
+            json.dump(details_dict, json_file)        
+    print(details_dict)
